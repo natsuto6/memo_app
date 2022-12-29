@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+body {
+  font-size: 16px;
+  font-family: Verdana, sans-serif;
+  width: 400px;
+  margin: 20px auto;
+}
+
+.container {
+  width: 400px;
+  margin: 20px auto;
+}
+
+h1 {
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+ul > li {
+  margin-bottom: 5px;
+}

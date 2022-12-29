@@ -1,0 +1,16 @@
+<div>
+  <p><%= h(@title) %></p>
+  <p><%= h(@content).gsub(/\n/, '<br/>') %></p>
+</div>
+<div>
+  <form action="/memos/<%= params[:id] %>/edit" method="get">
+    <input type="submit" value="変更">
+  </form>
+  <form action="/memos/<%= params[:id] %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="削除">
+  </form>
+</div>
+<div>
+  <a href="/memos">メモ一覧へ戻る</a>
+</div>

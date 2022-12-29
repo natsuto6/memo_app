@@ -1,0 +1,14 @@
+<form action="/memos/<%= params[:id] %>" method="post">
+  <div>
+    <input type="text" id="title" name="title" value="<%= @title %>">
+    <label for="title">タイトル</label>
+  </div>
+  <div>
+    <textarea id="content" name="content"><%= @content %></textarea>
+    <label for="content">内容</label>
+  </div>
+  <div>
+    <input type="hidden" name="_method" value="patch">
+    <input type="submit" value="保存">
+  </div>
+</form>
