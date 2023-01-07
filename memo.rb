@@ -34,12 +34,9 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  @title = params[:title]
-  @content = params[:content]
-
   memos = get_memos(FILE_PATH)
   id = SecureRandom.uuid
-  memos[id] = { 'title' => @title, 'content' => @content, 'time' => Time.now }
+  memos[id] = { 'title' => params[:title], 'content' => params[:content], 'time' => Time.now }
   set_memos(FILE_PATH, memos)
 
   redirect '/memos'
