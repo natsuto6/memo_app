@@ -10,6 +10,12 @@ helpers do
   end
 end
 
+helpers do
+  def exist_memo
+    "public/#{File.basename(params[:id])}.json"
+  end
+end
+
 FILE_PATH = 'public/memos.json'
 
 def get_memos(file_path)
@@ -65,12 +71,11 @@ get '/memos/:id/edit' do
 end
 
 patch '/memos/:id' do
-  @title = params[:title]
-  @content = params[:content]
-
-  memos = get_memos(FILE_PATH)
-  memos[params[:id]] = { 'title' => @title, 'content' => @content }
-  set_memos(FILE_PATH, memos)
+  if File.exist?(exist_memo)
+    memos = get_memos(FILE_PATH)
+    memos[params[:id]] = { 'title' => params[:title], 'content' => params[:content] }
+    set_memos(FILE_PATH, memos)
+  end
 
   redirect "/memos/#{params[:id]}"
 end
