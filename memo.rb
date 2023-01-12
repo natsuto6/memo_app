@@ -10,7 +10,7 @@ helpers do
   end
 end
 
-FILE_PATH = 'public/memos.json'
+FILE_PATH = 'data/memos.json'
 
 def get_memos(file_path)
   File.open(file_path) { |f| JSON.parse(f.read) }
