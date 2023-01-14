@@ -6,3 +6,4 @@ gem "sinatra"
 gem "webrick"
 gem "sinatra-contrib"
 gem 'erb_lint', require: false
+gem 'pg'
