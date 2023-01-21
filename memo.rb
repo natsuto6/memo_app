@@ -2,7 +2,7 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require 'json'
+require 'pg'
 
 helpers do
   def h(text)
@@ -10,14 +10,13 @@ helpers do
   end
 end
 
-FILE_PATH = 'data/memos.json'
-
-def get_memos(file_path)
-  File.open(file_path) { |f| JSON.parse(f.read) }
+def conn
+  @connection ||= PG.connect( dbname: 'postgres' )
 end
 
-def set_memos(file_path, memos)
-  File.open(file_path, 'w') { |f| JSON.dump(memos, f) }
+configure do
+  result = conn.exec( "SELECT * FROM infomation_schema.tables WHERE table_name = 'memos'" )
+  conn.exec( "CREATE TABLE memos (id serial, title varchar(255), content text)" ) if result.values.empty?
 end
 
 get '/' do
