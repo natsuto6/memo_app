@@ -11,12 +11,16 @@ helpers do
 end
 
 def conn
-  @connection ||= PG.connect( dbname: 'postgres' )
+  @conn ||= PG.connect(dbname: 'postgres')
 end
 
 configure do
-  result = conn.exec( "SELECT * FROM infomation_schema.tables WHERE table_name = 'memos'" )
-  conn.exec( "CREATE TABLE memos (id serial, title varchar(255), content text)" ) if result.values.empty?
+  result = conn.exec("SELECT * FROM infomation_schema.tables WHERE table_name = 'memos'")
+  conn.exec('CREATE TABLE memos (id serial, title varchar(255), content text)') if result.values.empty?
+end
+
+def load_memos
+  conn.exec('SELECT * FROM memos')
 end
 
 get '/' do
@@ -24,7 +28,7 @@ get '/' do
 end
 
 get '/memos' do
-  @memos = get_memos(FILE_PATH)
+  @memos = load_memos
   erb :index
 end
 
