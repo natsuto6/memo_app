@@ -15,7 +15,7 @@ def conn
 end
 
 configure do
-  result = conn.exec("SELECT * FROM infomation_schema.tables WHERE table_name = 'memos'")
+  result = conn.exec("SELECT * FROM information_schema.tables WHERE table_name = 'memos'")
   conn.exec('CREATE TABLE memos (id serial, title varchar(255), content text)') if result.values.empty?
 end
 
