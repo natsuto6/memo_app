@@ -23,6 +23,10 @@ def load_memos
   conn.exec('SELECT * FROM memos')
 end
 
+def memo_creation(title, content)
+  conn.exec_params('INSERT INTO memos(title, content) VALUES ($1, $2);', [title, content])
+end
+
 get '/' do
   redirect '/memos'
 end
@@ -37,11 +41,10 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  memos = get_memos(FILE_PATH)
-  id = SecureRandom.uuid
-  memos[id] = { 'title' => params[:title], 'content' => params[:content], 'time' => Time.now }
-  set_memos(FILE_PATH, memos)
-
+  title = params[:title]
+  content = params[:content]
+  memo_creation(title, content)
+  
   redirect '/memos'
 end
 
