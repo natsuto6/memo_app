@@ -32,6 +32,10 @@ def memo_creation(title, content)
   conn.exec_params('INSERT INTO memos(title, content) VALUES ($1, $2);', [title, content])
 end
 
+def memo_edit(title, content, id)
+  conn.exec_params('UPDATE memos SET title = $1, content = $2 WHERE id = $3;', [title, content, id])
+end
+
 def memo_deletion(id)
   conn.exec_params('DELETE FROM memos WHERE id = $1;', [id])
 end
@@ -69,18 +73,15 @@ delete '/memos/:id' do
 end
 
 get '/memos/:id/edit' do
-  memos = get_memos(FILE_PATH)
-  @title = memos[params[:id]]['title']
-  @content = memos[params[:id]]['content']
+  memo = load_memo(params[:id])
+  @title = memo[1]
+  @content = memo[2]
   erb :edit
 end
 
 patch '/memos/:id' do
-    memos = get_memos(FILE_PATH)
-    if memos.key?(params[:id])
-      memos[params[:id]] = { 'title' => params[:title], 'content' => params[:content] }
-      set_memos(FILE_PATH, memos)
-    end
-
+  title = params[:title]
+  content = params[:content]
+  memo_edit(title, content, params[:id])
   redirect "/memos/#{params[:id]}"
 end
