@@ -6,6 +6,7 @@
 
 - Ruby:3.1.2
 - Bundler:2.3.16
+- PostgreSQL:14.6
 
 ## インストール
 
@@ -30,12 +31,17 @@ $ bundle install
 
 ## 使用方法
 
-1. 以下のコマンドを実行し、メモアプリを起動します。
+1. PostgreSQLを起動します。
+```
+$ brew services start postgresql
+```
+
+2. 以下のコマンドを実行し、メモアプリを起動します。
 ```
 $ ruby memo.rb
 ```
 
-2. ブラウザで以下のURLに接続します。
+3. ブラウザで以下のURLに接続します。
 ```
 http://localhost:4567
 ```
