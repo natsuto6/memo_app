@@ -20,7 +20,7 @@ configure do
 end
 
 def load_memos
-  conn.exec('SELECT * FROM memos')
+  conn.exec('SELECT * FROM memos ORDER BY id ASC')
 end
 
 def load_memo(id)
@@ -61,9 +61,7 @@ post '/memos' do
 end
 
 get '/memos/:id' do
-  memo = load_memo(params[:id])
-  @title = memo[1]
-  @content = memo[2]
+  @memo = load_memo(params[:id])
   erb :show
 end
 

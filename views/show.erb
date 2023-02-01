@@ -1,6 +1,6 @@
 <div>
-  <p><%= h(@title) %></p>
-  <p><%= h(@content).gsub(/\n/, '<br/>') %></p>
+  <p><%= h(@memo[1]) %></p>
+  <p><%= h(@memo[2]).gsub(/\n/, '<br/>') %></p>
 </div>
 <div>
   <form action="/memos/<%= params[:id] %>/edit" method="get">
