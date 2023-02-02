@@ -71,9 +71,7 @@ delete '/memos/:id' do
 end
 
 get '/memos/:id/edit' do
-  memo = load_memo(params[:id])
-  @title = memo[1]
-  @content = memo[2]
+  @memo = load_memo(params[:id])
   erb :edit
 end
 

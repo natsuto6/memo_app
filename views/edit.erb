@@ -1,10 +1,10 @@
 <form action="/memos/<%= params[:id] %>" method="post">
   <div>
-    <input type="text" id="title" name="title" value="<%= h(@title) %>">
+    <input type="text" id="title" name="title" value="<%= h(@memo[1]) %>">
     <label for="title">タイトル</label>
   </div>
   <div>
-    <textarea id="content" name="content"><%= h(@content) %></textarea>
+    <textarea id="content" name="content"><%= h(@memo[2]) %></textarea>
     <label for="content">内容</label>
   </div>
   <div>
